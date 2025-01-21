@@ -260,9 +260,9 @@ public class TelepopRed extends LinearOpMode implements Inter{
            //En3.setPower(lamp);
 
             if(openHook){
-                hookServo.setPosition(0.5);
+                hookServo.setPosition(0.7);
             }else {
-                hookServo.setPosition(1);
+                hookServo.setPosition(0.4);
             }
 
 
