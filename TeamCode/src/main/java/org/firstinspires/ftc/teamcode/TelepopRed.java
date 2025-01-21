@@ -147,6 +147,9 @@ public class TelepopRed extends LinearOpMode implements Inter{
                     while (!isStopRequested() & opModeIsActive()) {
 
 
+                        double leftStickY = -gamepad1.left_stick_y;
+                        double leftStickX = gamepad1.left_stick_x;
+                        turn = gamepad1.right_stick_x;
                         //ТЕЛЕЖКА
 
 
@@ -161,25 +164,25 @@ public class TelepopRed extends LinearOpMode implements Inter{
 //                        }
 
                         //Поворот
-                        turn = gamepad1.right_stick_x;
+
 
                         //Мощность моторов
-                        zm1 = -1 * (Range.clip((gamepad1.left_stick_x + gamepad1.left_stick_y - -1 * turn) * a, -1, 1));
+                        zm1 =  (Range.clip((-leftStickX - leftStickY - turn) * a, -1, 1));
                         if (zm1 > -0.05 && zm1 < 0.05) {
                             zm1 = 0;
                         }
 
-                        zm2 = Range.clip((gamepad1.left_stick_x - gamepad1.left_stick_y - turn) * a, -1, 1);
+                        zm2 = Range.clip((leftStickX - leftStickY - turn) * a, -1, 1);
                         if (zm2 > -0.05 && zm2 < 0.05) {
                             zm2 = 0;
                         }
 
-                        zm3 = -1 * (Range.clip((-gamepad1.left_stick_x - gamepad1.left_stick_y - -1 * turn) * a, -1, 1));
+                        zm3 = (Range.clip((-leftStickX + leftStickY  - turn) * a, -1, 1));
                         if (zm3 > -0.05 && zm3 < 0.05) {
                             zm3 = 0;
                         }
 
-                        zm4 = Range.clip((-gamepad1.left_stick_x + gamepad1.left_stick_y - turn) * a, -1, 1);
+                        zm4 = Range.clip((leftStickX + leftStickY - turn) * a, -1, 1);
                         if (zm4 > -0.05 && zm4 < 0.05) {
                             zm4 = 0;
                         }
@@ -271,9 +274,9 @@ public class TelepopRed extends LinearOpMode implements Inter{
 
 
             if(openTele){
-                teleServo.setPosition(0.8);
-            }else {
                 teleServo.setPosition(0.0);
+            }else {
+                teleServo.setPosition(0.8);
             }
 
             telemetry.addData("Состояние тригера", gamepad1.left_trigger);
